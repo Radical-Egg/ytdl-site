@@ -1,0 +1,25 @@
+// importing expressJS
+const express = require('express');
+const fs = require('fs');
+const ytdl = require('ytdl-core');
+
+// make app
+const app = express();
+
+// listening on port 3000
+const port = 3000;
+
+// GET
+app.get('/', (req, res) => {
+    // send response
+    res.render("./index.html");
+});
+
+app.post('/download', (req, res)) {
+    ytdl('https://www.youtube.com/watch?v=JlgKybraoy4').pipe(fs.createWriteStream('video.mp4'));
+}
+
+
+
+// listening
+app.listen(port, () => console.log("listening on port" + port));
